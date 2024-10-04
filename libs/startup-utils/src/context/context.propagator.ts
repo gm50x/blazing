@@ -64,6 +64,6 @@ export const configureOutboundHttpContextPropagation = (
   for (const module of [http, https]) {
     mountContextInterceptor(context, module);
   }
-  Logger.log('Http Context Propagation initialized', '@gedai/core/config');
+  Logger.log('Http Context Propagation initialized', 'StartupUtils');
   return app;
 };

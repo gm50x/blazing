@@ -19,7 +19,7 @@ import {
   ContextModuleOptions,
 } from './context.options';
 
-const KEY = '@gedai/core/propagated-context';
+const KEY = 'StartupUtils';
 
 type ReloadContextMetadata = {
   interceptorSetup?: ContextInterceptorSetup;

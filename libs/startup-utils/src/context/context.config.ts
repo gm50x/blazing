@@ -18,6 +18,6 @@ export const configureContextWrappers = (app: INestApplication) => {
   });
   app.use(middleware);
   configureOutboundHttpContextPropagation(app);
-  Logger.log(`${ContextWrapper.name} was initialized`, '@gedai/core');
+  Logger.log(`${ContextWrapper.name} was initialized`, 'StartupUtils');
   return app;
 };

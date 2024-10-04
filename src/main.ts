@@ -1,11 +1,8 @@
-import { configureContextWrappers } from '@fiap-burger/core';
-import { NestFactory } from '@nestjs/core';
+import { createNestApp } from '@fiap-burger/startup-utils';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule).then(
-    configureContextWrappers,
-  );
+  const app = await createNestApp(AppModule);
 
   await app.listen(3000);
 }
