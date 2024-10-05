@@ -8,11 +8,11 @@
   "main": "dist/main",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/apps/fiap-burger-items/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --config ./test/config/jest-unit.js",
     "test:watch": "jest --watch",
@@ -79,7 +79,6 @@
     "collectCoverageFrom": [
       "<rootDir>/src/**/*.(t|j)s",
       "<rootDir>/libs/**/*.(t|j)s",
-      "!**/*.(spec|test).(t|j)s",
       "!**/main.(t|j)s",
       "!**/libs/ignition/**"
     ],
@@ -92,9 +91,8 @@
     },
     "testEnvironment": "node",
     "roots": [
-      "<rootDir>/src/",
-      "<rootDir>/test/",
-      "<rootDir>/libs/"
+      "<rootDir>/libs/",
+      "<rootDir>/apps/"
     ],
     "moduleNameMapper": {
       "^@fiap-burger/ignition(|/.*)$": "<rootDir>/libs/ignition/src/$1"
