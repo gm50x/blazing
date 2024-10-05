@@ -10,7 +10,7 @@ import { AppService } from './app.service';
     ContextModule.forRoot({}),
     CommonModule.forRoot({
       // TODO: must go to config class
-      appName: 'BlaingApp',
+      appName: 'BlazingApp',
       appVersion: '1.0.0',
       appDescription: 'Sample application',
       environment: 'development',
