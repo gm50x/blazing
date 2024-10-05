@@ -65,7 +65,6 @@ class HttpInspectorInboundMiddleware implements NestMiddleware {
           method: req.method,
           path: req.path,
           baseURL: `${req.protocol}://${req.get('host')}`,
-          url: req.originalUrl,
           headers: req.headers,
           body: req.body,
           query: req.query,
