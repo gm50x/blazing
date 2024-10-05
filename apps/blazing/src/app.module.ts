@@ -10,9 +10,9 @@ import { AppService } from './app.service';
     ContextModule.forRoot({}),
     CommonModule.forRoot({
       // TODO: must go to config class
-      appName: 'FiapBurgerItems',
+      appName: 'BlaingApp',
       appVersion: '1.0.0',
-      appDescription: 'Provides Items Catalog for FiapBurger',
+      appDescription: 'Sample application',
       environment: 'development',
       logger: { format: 'pretty', level: 'debug' },
       httpTrafficInspection: { mode: 'all' },

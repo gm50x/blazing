@@ -1,11 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/fiap-burger-items/src",
+  "sourceRoot": "apps/blazing/src",
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "tsConfigPath": "apps/fiap-burger-items/tsconfig.app.json"
+    "tsConfigPath": "apps/blazing/tsconfig.app.json"
   },
   "projects": {
     "ignited": {
@@ -17,16 +17,16 @@
         "tsConfigPath": "libs/ignited/tsconfig.lib.json"
       }
     },
-    "fiap-burger-items": {
+    "blazing": {
       "type": "application",
-      "root": "apps/fiap-burger-items",
+      "root": "apps/blazing",
       "entryFile": "main",
-      "sourceRoot": "apps/fiap-burger-items/src",
+      "sourceRoot": "apps/blazing/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/fiap-burger-items/tsconfig.app.json"
+        "tsConfigPath": "apps/blazing/tsconfig.app.json"
       }
     }
   },
   "monorepo": true,
-  "root": "apps/fiap-burger-items"
+  "root": "apps/blazing"
 }
