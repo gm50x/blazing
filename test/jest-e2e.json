@@ -7,7 +7,7 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "moduleNameMapper": {
-    "@fiap-burger/startup-utils/(.*)": "<rootDir>/../libs/startup-utils/src/$1",
-    "@fiap-burger/startup-utils": "<rootDir>/../libs/startup-utils/src"
+    "@fiap-burger/ignition/(.*)": "<rootDir>/../libs/ignition/src/$1",
+    "@fiap-burger/ignition": "<rootDir>/../libs/ignition/src"
   }
 }

@@ -1,4 +1,4 @@
-import { CommonModule, ContextModule } from '@fiap-burger/startup-utils';
+import { CommonModule, ContextModule } from '@fiap-burger/ignition';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
@@ -10,9 +10,10 @@ import { AppService } from './app.service';
     ContextModule.forRoot({}),
     CommonModule.forRoot({
       // TODO: must go to config class
-      appName: 'FiapBurger',
+      appName: 'FiapBurgerItems',
       appVersion: '1.0.0',
-      environment: 'dev',
+      appDescription: 'Provides Items Catalog for FiapBurger',
+      environment: 'development',
       logger: { format: 'pretty', level: 'debug' },
       httpTrafficInspection: { mode: 'all' },
     }),

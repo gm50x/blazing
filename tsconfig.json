@@ -18,8 +18,8 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@fiap-burger/startup-utils": ["libs/startup-utils/src"],
-      "@fiap-burger/startup-utils/*": ["libs/startup-utils/src/*"]
+      "@fiap-burger/ignition": ["libs/ignition/src"],
+      "@fiap-burger/ignition/*": ["libs/ignition/src/*"]
     }
   }
 }

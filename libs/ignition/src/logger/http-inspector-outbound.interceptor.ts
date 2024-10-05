@@ -3,7 +3,11 @@ import * as http from 'http';
 import * as https from 'https';
 import { MODULE_OPTIONS_TOKEN } from '../common/common.builder';
 import { CommonModuleOptions } from '../common/common.options';
-import { logRequestError, logResponse } from './http-inspector.utils';
+import {
+  logRequestError,
+  logResponse,
+  routeToRegex,
+} from './http-inspector.utils';
 
 const handleResponse =
   (
@@ -114,13 +118,7 @@ export const configureHttpInspectorOutbound = (app: INestApplication) => {
   }
   const logger = new Logger('OutboundHTTPInspection');
   for (const module of [http, https]) {
-    mountInterceptor(
-      logger,
-      module,
-      allowedOutboundRoutes?.map(
-        (x) => new RegExp(`^${x.replace('*', '.+')}$`, 'i'),
-      ),
-    );
+    mountInterceptor(logger, module, allowedOutboundRoutes?.map(routeToRegex));
   }
   logger.log('Outbound http inspection initialized', 'StartupUtils');
   return app;

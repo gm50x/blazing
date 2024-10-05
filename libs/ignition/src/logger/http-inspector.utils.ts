@@ -88,3 +88,6 @@ export function logRequestError(
     },
   });
 }
+
+export const routeToRegex = (x: string) =>
+  new RegExp(`^${x.replace('*', '.*')}$`, 'i');

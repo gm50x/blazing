@@ -1,4 +1,4 @@
-import { createNestApp } from '@fiap-burger/startup-utils';
+import { createNestApp } from '@fiap-burger/ignition';
 import { AppModule } from './app.module';
 
 async function bootstrap() {

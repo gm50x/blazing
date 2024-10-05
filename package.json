@@ -82,7 +82,7 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@fiap-burger/startup-utils(|/.*)$": "<rootDir>/libs/startup-utils/src/$1"
+      "^@fiap-burger/ignition(|/.*)$": "<rootDir>/libs/ignition/src/$1"
     }
   }
 }

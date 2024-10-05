@@ -7,13 +7,13 @@
     "webpack": true
   },
   "projects": {
-    "startup-utils": {
+    "ignition": {
       "type": "library",
-      "root": "libs/startup-utils",
+      "root": "libs/ignition",
       "entryFile": "index",
-      "sourceRoot": "libs/startup-utils/src",
+      "sourceRoot": "libs/ignition/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/startup-utils/tsconfig.lib.json"
+        "tsConfigPath": "libs/ignition/tsconfig.lib.json"
       }
     }
   }

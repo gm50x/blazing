@@ -7,6 +7,7 @@ import {
 import { NextFunction, Request, Response } from 'express';
 import { MODULE_OPTIONS_TOKEN } from '../common/common.builder';
 import { CommonModuleOptions } from '../common/common.options';
+import { routeToRegex } from './http-inspector.utils';
 
 @Injectable()
 class HttpInspectorInboundMiddleware implements NestMiddleware {
@@ -103,7 +104,7 @@ export const configureHttpInspectorInbound = (app: INestApplication) => {
   }
 
   const inspector = new HttpInspectorInboundMiddleware(
-    ignoreRoutes.map((x) => new RegExp(`^${x.replace('*', '.*')}$`, 'i')),
+    ignoreRoutes.map(routeToRegex),
   );
   const middleware = inspector.use.bind(inspector);
 
