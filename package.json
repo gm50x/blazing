@@ -5,6 +5,7 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "main": "dist/main",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
@@ -13,11 +14,14 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
+    "test": "jest --config ./test/config/jest-unit.js",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test:cov": "jest --coverage --config ./test/config/jest-unit.js",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:integration": "jest --config ./test/config/jest-integration.js",
+    "test:integration:cov": "jest --config ./test/config/jest-integration.js --coverage",
+    "test:all": "jest --config ./test/config/jest-all.js",
+    "test:all:cov": "jest --config ./test/config/jest-all.js --coverage"
   },
   "dependencies": {
     "@nestjs/axios": "^3.0.3",
@@ -73,12 +77,23 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "<rootDir>/src/**/*.(t|j)s",
+      "<rootDir>/libs/**/*.(t|j)s",
+      "!**/*.(spec|test).(t|j)s",
+      "!**/main.(t|j)s",
+      "!**/libs/ignition/**"
     ],
     "coverageDirectory": "./coverage",
+    "coverageThreshold": {
+      "global": {
+        "lines": 80,
+        "branches": 90
+      }
+    },
     "testEnvironment": "node",
     "roots": [
       "<rootDir>/src/",
+      "<rootDir>/test/",
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
