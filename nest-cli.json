@@ -8,13 +8,13 @@
     "tsConfigPath": "apps/fiap-burger-items/tsconfig.app.json"
   },
   "projects": {
-    "ignition": {
+    "ignited": {
       "type": "library",
-      "root": "libs/ignition",
+      "root": "libs/ignited",
       "entryFile": "index",
-      "sourceRoot": "libs/ignition/src",
+      "sourceRoot": "libs/ignited/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/ignition/tsconfig.lib.json"
+        "tsConfigPath": "libs/ignited/tsconfig.lib.json"
       }
     },
     "fiap-burger-items": {

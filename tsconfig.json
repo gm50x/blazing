@@ -18,11 +18,11 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@fiap-burger/ignition": [
-        "libs/ignition/src"
+      "@fiap-burger/ignited": [
+        "libs/ignited/src"
       ],
-      "@fiap-burger/ignition/*": [
-        "libs/ignition/src/*"
+      "@fiap-burger/ignited/*": [
+        "libs/ignited/src/*"
       ]
     }
   }

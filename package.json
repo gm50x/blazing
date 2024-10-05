@@ -80,7 +80,7 @@
       "<rootDir>/src/**/*.(t|j)s",
       "<rootDir>/libs/**/*.(t|j)s",
       "!**/main.(t|j)s",
-      "!**/libs/ignition/**"
+      "!**/libs/ignited/**"
     ],
     "coverageDirectory": "./coverage",
     "coverageThreshold": {
@@ -95,7 +95,7 @@
       "<rootDir>/apps/"
     ],
     "moduleNameMapper": {
-      "^@fiap-burger/ignition(|/.*)$": "<rootDir>/libs/ignition/src/$1"
+      "^@fiap-burger/ignited(|/.*)$": "<rootDir>/libs/ignited/src/$1"
     }
   }
 }
