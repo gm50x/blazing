@@ -1,4 +1,4 @@
-import { CommonModule, ContextModule } from '@fiap-burger/ignited';
+import { CommonModule, ContextModule } from '@blazing/ignited';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';

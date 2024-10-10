@@ -95,7 +95,7 @@
       "<rootDir>/apps/"
     ],
     "moduleNameMapper": {
-      "^@fiap-burger/ignited(|/.*)$": "<rootDir>/libs/ignited/src/$1"
+      "^@blazing/ignited(|/.*)$": "<rootDir>/libs/ignited/src/$1"
     }
   }
 }

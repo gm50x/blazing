@@ -1,4 +1,4 @@
-import { createNestApp } from '@fiap-burger/ignited';
+import { createNestApp } from '@blazing/ignited';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
