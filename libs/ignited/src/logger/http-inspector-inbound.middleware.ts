@@ -55,11 +55,24 @@ class HttpInspectorInboundMiddleware implements NestMiddleware {
       return res.json(body);
     };
 
+    this.logger.log({
+      message: `[HTTP] [INBOUND] [REQUEST] [${req.method}] [${req.path}]`,
+      request: {
+        ip: req.ip,
+        method: req.method,
+        path: req.path,
+        baseURL: `${req.protocol}://${req.get('host')}`,
+        headers: req.headers,
+        body: req.body,
+        query: req.query,
+      },
+    });
+
     res.on('finish', () => {
       const executionTimeMillis = `${Date.now() - requestStartTimestamp}ms`;
       const logLevel = this.getLogLevel(res);
       this.logger[logLevel]({
-        message: `[HTTP] [INBOUND] [${req.method}] [${req.path}] [${res.statusCode}] [${executionTimeMillis}]`,
+        message: `[HTTP] [OUTBOUND] [RESPONSE] [${req.method}] [${req.path}] [${res.statusCode}] [${executionTimeMillis}]`,
         executionTime: executionTimeMillis,
         request: {
           ip: req.ip,
