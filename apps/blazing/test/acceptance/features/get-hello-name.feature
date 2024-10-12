@@ -1,13 +1,14 @@
-Feature: Get Personalized Hello
+Feature: Greetings
+  Everybody gets their own greeting
 
-  Scenario Outline: Every person receives their own greeting
-    Given user is named <name> 
-    When we invoke GET hello name Endpoint
-    Then it should reply with Hello <name>!
+  Scenario Outline: Trigger hello with name
+    Given a named user "<name>"
+    When I hit GET Hello name
+    Then it should return "<answer>"
 
   Examples:
-      | name    |
-      | Jack    |
-      | Hector  |
-      | Oliver  |
-      
+    | name   | answer       |
+    | Jack   | Hello Jack!  |
+    | Jane   | Hello Jane!  |
+    | June   | Hello June!  |
+    
