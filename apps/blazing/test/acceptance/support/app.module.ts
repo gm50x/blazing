@@ -1,6 +1,6 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { GetHelloSuiteSteps } from './step-definitions/get-hello-name.steps';
+import { GetHelloNameSuiteSteps } from './step-definitions/greetings-suite.steps';
 import { IsItFridayYetSuiteSteps } from './step-definitions/is-it-friday-yet.steps';
 // import { GlobalHooks } from './step-definitions/global-hooks';
 // import { RunHooksSteps } from './step-definitions/run-hooks.steps';
@@ -10,7 +10,8 @@ import { IsItFridayYetSuiteSteps } from './step-definitions/is-it-friday-yet.ste
   imports: [HttpModule],
   providers: [
     IsItFridayYetSuiteSteps,
-    GetHelloSuiteSteps,
+    GetHelloNameSuiteSteps,
+    // GetHelloWorldSuiteSteps,
     // GetHelloWorldSuiteSteps,
     // GetHelloNameSuiteSteps,
     // ScenarioScopedSuiteSteps,

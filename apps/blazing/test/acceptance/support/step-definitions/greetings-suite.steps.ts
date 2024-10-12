@@ -3,22 +3,33 @@ import { strict as assert } from 'assert';
 import { Given, Suite, Then, When } from '../../lib';
 
 @Suite()
-export class GetHelloSuiteSteps {
+export class GetHelloNameSuiteSteps {
   private name: string;
   private actualAnswer: string;
 
   constructor(private readonly http: HttpService) {}
 
-  @Given('a named user {string}')
-  setToday(name: string) {
+  @Given('I am a known user {string}')
+  setName(name: string) {
     this.name = name;
   }
 
-  @When('I hit GET Hello name')
+  @When('I hit GET hello name')
   async getHelloName() {
     const res = await this.http.axiosRef.get(
       `http://localhost:3000/hello/${this.name}`,
     );
+    this.actualAnswer = res.data;
+  }
+
+  @Given('I am an unknown user')
+  setUnknownUser() {
+    this.name = null;
+  }
+
+  @When('I hit GET hello')
+  async getHello() {
+    const res = await this.http.axiosRef.get(`http://localhost:3000/hello`);
     this.actualAnswer = res.data;
   }
 

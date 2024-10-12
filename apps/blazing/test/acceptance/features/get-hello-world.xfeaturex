@@ -1,0 +1,7 @@
+Feature: Greetings Fallback
+  Nobody gets Hello World
+
+  Scenario: Trigger hello without name
+    Given I am an unknown user
+    When I hit GET Hello
+    Then I should be told "Hello World!"

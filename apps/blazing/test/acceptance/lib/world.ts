@@ -3,7 +3,8 @@ import { ModuleRef } from '@nestjs/core';
 import { getApp } from './app';
 
 export class NestWorld extends World {
-  public readonly contextId = { id: 1 };
+  private static globalContextId = 0;
+  public readonly contextId = { id: ++NestWorld.globalContextId };
 
   constructor(params: IWorldOptions) {
     super(params);
