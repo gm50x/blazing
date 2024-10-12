@@ -38,13 +38,11 @@ const withTrafficInspection = (
     const requestDataChunks = [];
     const callback = maybeCallback || callbackOrOptions;
     const shouldIgnoreRoute = () => {
-      return !enabledOutboundHosts.some((x) =>
-        x.test(
-          typeof urlOrOptions === 'string'
-            ? new URL(urlOrOptions).hostname.trim()
-            : urlOrOptions.hostname.trim(),
-        ),
-      );
+      const target =
+        typeof urlOrOptions === 'string'
+          ? new URL(urlOrOptions).hostname.trim()
+          : urlOrOptions.hostname.trim();
+      return !enabledOutboundHosts.some((x) => x.test(target));
     };
 
     if (shouldIgnoreRoute()) {
