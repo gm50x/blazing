@@ -31,14 +31,14 @@ const withTrafficInspection = (
     | typeof https.request
     | typeof http.get
     | typeof https.get,
-  allowedOutboundHosts: RegExp[],
+  enabledOutboundHosts: RegExp[],
 ) =>
   function (...args: any[]) {
     const [urlOrOptions, callbackOrOptions, maybeCallback] = args;
     const requestDataChunks = [];
     const callback = maybeCallback || callbackOrOptions;
     const shouldIgnoreRoute = () => {
-      return !allowedOutboundHosts.some((x) =>
+      return !enabledOutboundHosts.some((x) =>
         x.test(
           typeof urlOrOptions === 'string'
             ? new URL(urlOrOptions).hostname.trim()
@@ -85,7 +85,7 @@ const withTrafficInspection = (
 function mountInterceptor(
   logger: Logger,
   module: typeof http | typeof https,
-  allowedOutboundHosts: RegExp[],
+  enabledOutboundHosts: RegExp[],
 ) {
   for (const { target, name } of [
     { target: module.get, name: 'get' },
@@ -94,7 +94,7 @@ function mountInterceptor(
     const inspectedTarget = withTrafficInspection(
       logger,
       target,
-      allowedOutboundHosts,
+      enabledOutboundHosts,
     );
     Object.defineProperty(inspectedTarget, 'name', {
       value: name,
@@ -106,14 +106,13 @@ function mountInterceptor(
 
 export const configureHttpInspectorOutbound = (app: INestApplication) => {
   const options = app.get<CommonModuleOptions>(MODULE_OPTIONS_TOKEN);
-  const { mode, allowedOutboundRoutes, allowedOutboundHosts } =
-    options.httpTrafficInspection ?? {};
+  const { mode, enabledOutboundHosts } = options.httpTrafficInspection ?? {};
   if (!['all', 'outbound'].includes(mode)) {
     return app;
   }
   const logger = new Logger('OutboundHTTPInspection');
   for (const module of [http, https]) {
-    mountInterceptor(logger, module, allowedOutboundHosts?.map(routeToRegex));
+    mountInterceptor(logger, module, enabledOutboundHosts?.map(routeToRegex));
   }
   logger.log('Outbound http inspection initialized', 'StartupUtils');
   return app;
