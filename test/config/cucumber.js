@@ -4,9 +4,9 @@ const { DEFAULT_THEME } = require('@cucumber/pretty-formatter');
 module.exports = {
   default: {
     publishQuiet: true,
-    paths: ['./apps/blazing/test/acceptance/features/**/*.feature'],
+    paths: ['test/acceptance/features/**/*.feature'],
     requireModule: ['ts-node/register', 'tsconfig-paths/register'],
-    require: ['./apps/blazing/test/acceptance/main.ts'],
+    require: ['test/acceptance/main.ts'],
     format: ['@cucumber/pretty-formatter'],
     formatOptions: {
       colorsEnabled: true,

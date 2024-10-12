@@ -3,7 +3,7 @@ import { strict as assert } from 'assert';
 import { Given, Suite, Then, When } from '../../lib';
 
 @Suite()
-export class GetHelloNameSuiteSteps {
+export class GreetingsSuiteSteps {
   private name: string;
   private actualAnswer: string;
 

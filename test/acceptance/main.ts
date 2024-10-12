@@ -1,4 +1,4 @@
 import { bootstrap } from './lib';
-import { AppModule } from './support/app.module';
+import { AppModule } from './steps/app.module';
 
 bootstrap(AppModule);
