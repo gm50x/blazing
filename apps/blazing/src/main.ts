@@ -1,4 +1,4 @@
-import { createNestApp } from 'libs/ignition/src';
+import { createNestApp } from '@blazing/ignition';
 import { AppModule } from './app.module';
 
 async function bootstrap() {

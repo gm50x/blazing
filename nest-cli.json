@@ -43,6 +43,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/amqp/tsconfig.lib.json"
       }
+    },
+    "test-factory": {
+      "type": "library",
+      "root": "libs/test-factory",
+      "entryFile": "index",
+      "sourceRoot": "libs/test-factory/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/test-factory/tsconfig.lib.json"
+      }
     }
   },
   "monorepo": true,

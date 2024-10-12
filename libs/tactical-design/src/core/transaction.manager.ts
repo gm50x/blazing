@@ -1,6 +1,6 @@
+import { ContextService } from '@blazing/ignition';
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { ContextService } from 'libs/ignition/src';
 
 export abstract class Transaction<T = any> {
   constructor(protected readonly _hostTransaction: T) {}

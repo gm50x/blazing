@@ -1,6 +1,6 @@
+import { ContextService } from '@blazing/ignition';
 import { Injectable, Type } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/mongoose';
-import { ContextService } from 'libs/ignition/src';
 import { ClientSession, Connection } from 'mongoose';
 import { Transaction, TransactionManager } from '../core/transaction.manager';
 

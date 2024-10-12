@@ -25,6 +25,7 @@
     "test:accept": "cucumber-js -c ./test/config/cucumber.js"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.0.3",
     "@golevelup/nestjs-rabbitmq": "^5.5.0",
     "@nestjs/axios": "^3.0.3",
     "@nestjs/common": "^10.0.0",
@@ -103,9 +104,10 @@
       "<rootDir>/apps/"
     ],
     "moduleNameMapper": {
-      "^@blazing/ignition(|/.*)$": "<rootDir>/libs/ignited/src/$1",
+      "^@blazing/ignition(|/.*)$": "<rootDir>/libs/ignition/src/$1",
       "^@blazing/tactical-design(|/.*)$": "<rootDir>/libs/tactical-design/src/$1",
-      "^@blazing/amqp(|/.*)$": "<rootDir>/libs/amqp/src/$1"
+      "^@blazing/amqp(|/.*)$": "<rootDir>/libs/amqp/src/$1",
+      "^@blazing/test-factory(|/.*)$": "<rootDir>/libs/test-factory/src/$1"
     }
   }
 }

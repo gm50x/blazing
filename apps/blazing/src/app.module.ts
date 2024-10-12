@@ -6,8 +6,7 @@ import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AccountModule } from './account/account.module';
 import { AmqpConfig, AmqpPublisherConfig } from './config/amqp.config';
 import { AppConfig } from './config/app.config';
 import { MongooseConfig } from './config/mongoose.config';
@@ -24,8 +23,8 @@ import { MongooseConfig } from './config/mongoose.config';
     AmqpPublisherContextModule.forFeatureAsync({
       useClass: AmqpPublisherConfig,
     }),
+    // :: Add Application Modules ::
+    AccountModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

@@ -34,7 +34,7 @@ export const getDelayedRetrialExchange = (prefix: string) => ({
 
 export const getRerouterQueueName = (prefix: string) => ({
   name: withPrefix(prefix, AmqpParams.RerouterQueue),
-  exchange: AmqpParams.DelayedExchange,
+  exchange: withPrefix(prefix, AmqpParams.DelayedExchange),
   routingKey: '#',
   options: {
     arguments: { 'x-message-ttl': 0 },

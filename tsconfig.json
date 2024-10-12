@@ -35,6 +35,12 @@
       ],
       "@blazing/amqp/*": [
         "libs/amqp/src/*"
+      ],
+      "@blazing/test-factory": [
+        "libs/test-factory/src"
+      ],
+      "@blazing/test-factory/*": [
+        "libs/test-factory/src/*"
       ]
     }
   }
