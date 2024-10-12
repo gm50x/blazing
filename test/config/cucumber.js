@@ -3,7 +3,6 @@ const { DEFAULT_THEME } = require('@cucumber/pretty-formatter');
 
 module.exports = {
   default: {
-    publishQuiet: true,
     paths: ['test/acceptance/features/**/*.feature'],
     requireModule: ['ts-node/register', 'tsconfig-paths/register'],
     require: ['test/acceptance/main.ts'],

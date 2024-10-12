@@ -1,3 +1,4 @@
+@HelloWorld
 Feature: Greetings
   Everybody gets their own greeting
 
@@ -8,11 +9,11 @@ Feature: Greetings
 
   Examples:
     | name   | answer       |
-    | Jack   | Hello Jack!  |
-    | Jane   | Hello Jane!  |
-    | June   | Hello June!  |
+    | Jack   | Hello, Jack!  |
+    | Jane   | Hello, Jane!  |
+    | June   | Hello, June!  |
     
   Scenario: Trigger hello without name
     Given I am an unknown user
     When I hit GET hello
-    Then it should return "Hello World!"
+    Then it should return "Hello, World!"
