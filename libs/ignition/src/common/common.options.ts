@@ -27,8 +27,7 @@ export type LoggerOptions = {
 export type HttpTrafficInspectionOptions = {
   mode?: 'none' | 'all' | 'inbound' | 'outbound';
   ignoredInboundRoutes?: string[];
-  allowedOutboundRoutes?: string[];
-  allowedOutboundHosts?: string[];
+  enabledOutboundHosts?: string[];
 };
 
 export type CORSOption = CorsOptions | CorsOptionsDelegate<any>;
