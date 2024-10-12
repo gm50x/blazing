@@ -60,7 +60,7 @@ const withTrafficInspection = (
     } else {
       request = target.apply(this, [urlOrOptions, wrappedCallback()]);
     }
-    request['__META__'] = { requestStart: Date.now() };
+    request['__META__'] = { executionStartTimestamp: Date.now() };
     const originalWrite = request.write;
     request.write = function write(...args: any[]) {
       const [chunk] = args;

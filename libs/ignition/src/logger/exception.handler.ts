@@ -25,7 +25,7 @@ class CustomExceptionHandler implements NestInterceptor {
     // TODO: how to supress NestJS Default Exception Handler from logging too?
     const exception = new RpcException(rawError);
     exception.stack = rawError.stack;
-    this.logger[logLevel]({ message: rawError.message, error: exception });
+    // this.logger[logLevel]({ message: rawError.message, error: exception });
     return exception;
   }
 
@@ -48,7 +48,7 @@ class CustomExceptionHandler implements NestInterceptor {
     exception.stack = rawError.stack;
     const logLevel =
       body.statusCode < HttpStatus.INTERNAL_SERVER_ERROR ? 'debug' : 'error';
-    this.logger[logLevel]({ message: rawError.message, error: exception });
+    // this.logger[logLevel]({ message: rawError.message, error: exception });
     return exception;
   }
 
@@ -59,6 +59,7 @@ class CustomExceptionHandler implements NestInterceptor {
     return next.handle().pipe(
       catchError((rawError) => {
         if (!['http', 'graphql'].includes(context.getType())) {
+          // TODO: we must find a wai for these to prevent these errors from being logged in nest's defualt exception handler
           throw this.handleRPCException(rawError);
         }
         throw this.handleHTTPException(rawError);

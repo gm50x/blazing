@@ -36,7 +36,7 @@ class HttpInspectorInboundMiddleware implements NestMiddleware {
     }
 
     let responseBody = null;
-    const requestStartTimestamp = Date.now();
+    const executionStartTimstamp = Date.now();
     const originalSend = res.send;
     res.send = (body) => {
       if (!responseBody) {
@@ -57,23 +57,7 @@ class HttpInspectorInboundMiddleware implements NestMiddleware {
 
     this.logger.log({
       message: `[HTTP] [INBOUND] [REQUEST] [${req.method}] [${req.path}]`,
-      request: {
-        ip: req.ip,
-        method: req.method,
-        path: req.path,
-        baseURL: `${req.protocol}://${req.get('host')}`,
-        headers: req.headers,
-        body: req.body,
-        query: req.query,
-      },
-    });
-
-    res.on('finish', () => {
-      const executionTimeMillis = `${Date.now() - requestStartTimestamp}ms`;
-      const logLevel = this.getLogLevel(res);
-      this.logger[logLevel]({
-        message: `[HTTP] [INBOUND] [RESPONSE] [${req.method}] [${req.path}] [${res.statusCode}] [${executionTimeMillis}]`,
-        executionTime: executionTimeMillis,
+      http: {
         request: {
           ip: req.ip,
           method: req.method,
@@ -83,11 +67,31 @@ class HttpInspectorInboundMiddleware implements NestMiddleware {
           body: req.body,
           query: req.query,
         },
-        response: {
-          statusCode: res.statusCode,
-          statusMessage: res.statusMessage,
-          headers: res.getHeaders(),
-          body: responseBody,
+      },
+    });
+
+    res.on('finish', () => {
+      const executionTimeMillis = `${Date.now() - executionStartTimstamp}ms`;
+      const logLevel = this.getLogLevel(res);
+      this.logger[logLevel]({
+        message: `[HTTP] [INBOUND] [RESPONSE] [${req.method}] [${req.path}] [${res.statusCode}] [${executionTimeMillis}]`,
+        executionTime: executionTimeMillis,
+        http: {
+          request: {
+            ip: req.ip,
+            method: req.method,
+            path: req.path,
+            baseURL: `${req.protocol}://${req.get('host')}`,
+            headers: req.headers,
+            body: req.body,
+            query: req.query,
+          },
+          response: {
+            statusCode: res.statusCode,
+            statusMessage: res.statusMessage,
+            headers: res.getHeaders(),
+            body: responseBody,
+          },
         },
       });
     });

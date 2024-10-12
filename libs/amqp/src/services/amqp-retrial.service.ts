@@ -1,10 +1,11 @@
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Message } from 'amqplib';
 import { BindingOptions } from '../decorators/amqp-binding.decorator';
 import { RetrialPolicy } from '../decorators/amqp-retrial-policy.decorator';
 import { doubleWithEveryAttemptDelayCalculator } from '../utils/amqp-delay.calculator';
 import { AmqpParams } from '../utils/amqp-params.util';
+import { FailedIdempotencyCheckException } from '../utils/amqp.internals';
 import { formatDLQ } from '../utils/format-dlq.util';
 import { getCurrentAttempt } from '../utils/get-current-attempt.util';
 
@@ -18,8 +19,6 @@ type ApplyPolicyInput = {
 
 @Injectable()
 export class AmqpRetrialService {
-  private logger = new Logger(this.constructor.name);
-
   constructor(private readonly amqp: AmqpConnection) {}
 
   async apply(args: ApplyPolicyInput): Promise<string> {
@@ -34,7 +33,11 @@ export class AmqpRetrialService {
 
     if (error instanceof BadRequestException) {
       await sendToDLQ();
-      return 'Nack::DeadLetter:BadRequest';
+      return 'Nack::DeadLetter::BadRequest';
+    }
+    if (error instanceof FailedIdempotencyCheckException) {
+      await sendToDLQ();
+      return 'Nack::DeadLetter:Idempotency';
     }
     if (!retrialPolicy) {
       await sendToDLQ();

@@ -1,3 +1,5 @@
+import { RabbitMQConfig } from '@golevelup/nestjs-rabbitmq';
+import { InternalServerErrorException } from '@nestjs/common';
 import { AmqpModuleOptions } from '../amqp.factory';
 import {
   AMQP_INTERNAL_DEFAULT_CHANNEL,
@@ -28,7 +30,15 @@ export class FailedPolicyException extends Error {
   }
 }
 
-export const InternalRabbitMQConfigFactory = (options: AmqpModuleOptions) => {
+export class FailedIdempotencyCheckException extends InternalServerErrorException {
+  constructor() {
+    super(`Failed Idempotency Check Exception`);
+  }
+}
+
+export const InternalRabbitMQConfigFactory = (
+  options: AmqpModuleOptions,
+): RabbitMQConfig => {
   const { exchanges = [] } = options;
   const exchangePrefix = options.retrialPrefix ?? '';
   const queues = mergeQueues(options, QueuesFromDecoratorsContainer);

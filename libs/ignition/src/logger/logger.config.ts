@@ -74,8 +74,17 @@ const treatError = format(({ stack: _stack, error, ...info }) => {
   };
 });
 
+const preventDefault = format((info) => {
+  /** TODO: this might hide uncatched errors */
+  if (info.context === 'ExceptionsHandler') {
+    return false;
+  }
+  return info;
+});
+
 const jsonFormat = () =>
   combine(
+    preventDefault(),
     timestamp(),
     environment(),
     service(),
@@ -87,6 +96,7 @@ const jsonFormat = () =>
 
 const prettyFormat = () =>
   combine(
+    preventDefault(),
     timestamp(),
     environment(),
     service(),

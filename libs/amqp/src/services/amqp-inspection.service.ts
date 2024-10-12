@@ -19,11 +19,12 @@ type InpsectInput = {
   binding?: BindingOptions;
   error?: any;
   status?: string;
+  executionStartTimestamp?: number;
 };
 
 @Injectable()
 export class AmqpInspectionService {
-  private logger = new Logger(this.constructor.name);
+  private readonly logger = new Logger(this.constructor.name);
 
   constructor(
     @Inject(MODULE_OPTIONS_TOKEN)
@@ -70,6 +71,27 @@ export class AmqpInspectionService {
     });
   }
 
+  inspectInboundPartial(args: InpsectInput): void {
+    const { binding, consumeMessage, data, retrialPolicy, throttlePolicy } =
+      args;
+
+    const { exchange, routingKey, queue } = binding;
+    const { content, fields, properties } = consumeMessage;
+    const message = `[AMQP] [INBOUND] [START] [${exchange}] [${routingKey}] [${queue}]`;
+
+    const logData = {
+      binding,
+      retrialPolicy,
+      throttlePolicy,
+      message: {
+        fields,
+        properties,
+        content: data ?? content.toString('utf8'),
+      },
+    };
+    this.logger.log({ message, amqp: logData });
+  }
+
   inspectInbound(args: InpsectInput): void {
     const {
       binding,
@@ -79,11 +101,12 @@ export class AmqpInspectionService {
       throttlePolicy,
       error,
       status,
+      executionStartTimestamp,
     } = args;
-
     const { exchange, routingKey, queue } = binding;
     const { content, fields, properties } = consumeMessage;
-    const message = `[AMQP] [INBOUND] [${exchange}] [${routingKey}] [${queue}] [${status}]`;
+    const executionTimeMillis = `${Date.now() - executionStartTimestamp}ms`;
+    const message = `[AMQP] [INBOUND] [END] [${exchange}] [${routingKey}] [${queue}] [${status}] [${executionTimeMillis}]`;
 
     const logData = {
       binding,
@@ -98,6 +121,6 @@ export class AmqpInspectionService {
       status,
     };
     const logLevel = this.getLogLevel(error);
-    this.logger[logLevel]({ message, amqp: logData });
+    this.logger[logLevel]({ message, executionTimeMillis, amqp: logData });
   }
 }

@@ -16,7 +16,9 @@ import {
 import { AmqpInspectionService } from '../services/amqp-inspection.service';
 import { AmqpRetrialService } from '../services/amqp-retrial.service';
 import { AmqpThrottleService } from '../services/amqp-throttle.service';
-import { FailedPolicyException } from '../utils/amqp.internals';
+import {
+  FailedPolicyException
+} from '../utils/amqp.internals';
 
 @Injectable()
 export class AmqpInterceptor implements NestInterceptor {
@@ -61,6 +63,30 @@ export class AmqpInterceptor implements NestInterceptor {
       throttlePolicy,
     };
 
+    const executionStartTimestamp = Date.now();
+    this.inspector.inspectInboundPartial(messageWithMetadata);
+
+    /**
+     * TODO: add a wait to check for idempotency and prevent execution here
+     *THIS IS A WIP
+     */
+
+    // const idempotentHandlerEnabled = false;
+    // if (idempotentHandlerEnabled) {
+    //   const error = new FailedIdempotencyCheckException();
+    //   const status = await this.retrial.apply({
+    //     ...messageWithMetadata,
+    //     error,
+    //   });
+    //   this.inspector.inspectInbound({
+    //     ...messageWithMetadata,
+    //     executionStartTimestamp: executionStartTimestamp,
+    //     status,
+    //     error,
+    //   });
+    //   return throwError(() => error);
+    // }
+
     return next.handle().pipe(
       tap(
         async () =>
@@ -71,6 +97,7 @@ export class AmqpInterceptor implements NestInterceptor {
       ),
       tap(() =>
         this.inspector.inspectInbound({
+          executionStartTimestamp,
           ...messageWithMetadata,
           status: 'Ack',
         }),
@@ -83,12 +110,14 @@ export class AmqpInterceptor implements NestInterceptor {
           });
           this.inspector.inspectInbound({
             ...messageWithMetadata,
+            executionStartTimestamp: executionStartTimestamp,
             status,
             error,
           });
         } catch (err) {
           this.inspector.inspectInbound({
             ...messageWithMetadata,
+            executionStartTimestamp: executionStartTimestamp,
             status: 'Nack::Requeue::FailedPolicy',
             error: err,
           });

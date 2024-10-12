@@ -11,6 +11,7 @@ import {
   applyDecorators,
 } from '@nestjs/common';
 import { Message } from 'amqplib';
+import { randomUUID } from 'crypto';
 import { AmqpInterceptor } from '../interceptors/amqp.interceptor';
 import {
   ChannelsFromDecoratorsContainer,
@@ -48,6 +49,7 @@ export const AmqpSubscription = ({
   channel,
   prefetch,
 }: SubscriptionOptions) => {
+  channel = channel ?? randomUUID().split('-')[0];
   QueuesFromDecoratorsContainer.add(queue);
   ChannelsFromDecoratorsContainer.push({
     name: channel,

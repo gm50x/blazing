@@ -77,8 +77,8 @@ export function logResponse(
   };
   const logMethod = getLogMethod();
 
-  const { request, requestStart } = (res as any).req['__META__'];
-  const executionTimeMillis = `${Date.now() - requestStart}ms`;
+  const { request, executionStartTimestamp } = (res as any).req['__META__'];
+  const executionTimeMillis = `${Date.now() - executionStartTimestamp}ms`;
 
   logger[logMethod]({
     message: `[HTTP] [OUTBOUND] [RESPONSE] [${request.method}] [${request.url}] [${status}] [${executionTimeMillis}]`,
@@ -93,52 +93,6 @@ export function logResponse(
     },
   });
 }
-// export function logResponse(
-//   req: http.ClientRequest,
-//   res: http.IncomingMessage,
-//   requestChunks: any[],
-//   responseChunks: any[],
-//   logger: Logger,
-//   error?: Error,
-// ) {
-//   const {
-//     statusCode: status,
-//     statusMessage: statusText,
-//     headers: responseHeaders,
-//   } = res;
-//   const getLogMethod = () => {
-//     if (error) return 'error';
-//     if (status >= 400) return 'warn';
-//     return 'log';
-//   };
-//   const getErrorIfNeeded = () => {
-//     if (error) return { error };
-//     return {};
-//   };
-//   const logMethod = getLogMethod();
-//   const [url, searchString] = req.path.split('?');
-//   const query = parseSearchString(searchString);
-//   const requestHeaders = req.getHeaders();
-//   logger[logMethod]({
-//     message: `[HTTP] [OUTBOUND] [${req.method}] [${url}] [${status}]`,
-//     ...getErrorIfNeeded(),
-//     request: {
-//       method: req.method,
-//       baseURL: `${req.protocol}//${req.host}`,
-//       path: req.path,
-//       url,
-//       query,
-//       headers: requestHeaders,
-//       body: parseData(requestHeaders, requestChunks),
-//     },
-//     response: {
-//       status,
-//       statusText,
-//       headers: responseHeaders,
-//       body: parseData(responseHeaders, responseChunks),
-//     },
-//   });
-// }
 
 export function logRequestError(
   req: http.ClientRequest,
