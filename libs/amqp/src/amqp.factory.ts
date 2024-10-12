@@ -15,6 +15,7 @@ export type AmqpModuleOptions = {
   appName?: string;
   heartbeatIntervalInSeconds?: number;
   reconnectInSeconds?: number;
+  retrialPrefix?: string;
   exchanges?: RabbitMQExchangeConfig[];
   queues?: RabbitMQQueueConfig[];
   channels?: (RabbitMQChannelConfig & { name: string })[];

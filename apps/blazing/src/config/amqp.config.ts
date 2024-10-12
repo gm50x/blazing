@@ -19,6 +19,7 @@ export class AmqpConfig implements AmqpOptionsFactory {
     return {
       url,
       appName,
+      retrialPrefix: appName,
       exchanges: [
         // ::StyleKeep::
         { name: exchangeEventRoot },

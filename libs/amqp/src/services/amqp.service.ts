@@ -1,4 +1,4 @@
-import { ContextService } from '@gedai/nestjs-core';
+import { ContextService } from '@blazing/ignition';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Injectable } from '@nestjs/common';
 import { MessageProperties } from 'amqplib';

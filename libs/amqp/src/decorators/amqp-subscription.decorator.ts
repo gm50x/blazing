@@ -1,4 +1,4 @@
-import { ReloadContext } from '@gedai/nestjs-core';
+import { ReloadContext } from '@blazing/ignition';
 import {
   RabbitSubscribe,
   defaultNackErrorHandler,

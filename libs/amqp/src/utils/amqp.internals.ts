@@ -1,8 +1,8 @@
 import { AmqpModuleOptions } from '../amqp.factory';
 import {
   AMQP_INTERNAL_DEFAULT_CHANNEL,
-  DELAYED_RETRIAL_EXCHANGE,
-  REROUTER_QUEUE,
+  getDelayedRetrialExchange,
+  getRerouterQueueName,
 } from './amqp-infrastructure.util';
 import { formatChannels } from './format-channels.util';
 import { mergeChannels } from './merge-channels.util';
@@ -30,9 +30,10 @@ export class FailedPolicyException extends Error {
 
 export const InternalRabbitMQConfigFactory = (options: AmqpModuleOptions) => {
   const { exchanges = [] } = options;
+  const exchangePrefix = options.retrialPrefix ?? '';
   const queues = mergeQueues(options, QueuesFromDecoratorsContainer);
-  exchanges.push(DELAYED_RETRIAL_EXCHANGE);
-  queues.push(REROUTER_QUEUE);
+  exchanges.push(getDelayedRetrialExchange(exchangePrefix));
+  queues.push(getRerouterQueueName(exchangePrefix));
   const channels = mergeChannels(options, ChannelsFromDecoratorsContainer);
   if (!channels.find((x) => x.default)) {
     channels.push(AMQP_INTERNAL_DEFAULT_CHANNEL);

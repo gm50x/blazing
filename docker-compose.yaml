@@ -1,4 +1,17 @@
 services:
+  rabbitmq:
+    image: blazing/rabbitmq:3-management-delayed
+    build:
+      context: ./localstack
+      dockerfile: ./Dockerfile.rabbitmq
+    container_name: blazing-rabbitmq
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: 'blazing'
+      RABBITMQ_DEFAULT_PASS: 'blazing'
+    ports:
+      - 5672:5672
+      - 15672:15672
   mongodb:
     image: blazing/mongodbrs:6
     build:
