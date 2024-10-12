@@ -1,0 +1,28 @@
+services:
+  mongodb:
+    image: blazing/mongodbrs:6
+    build:
+      context: ./localstack
+      dockerfile: ./Dockerfile.mongodb
+    container_name: blazing-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'blazing'
+      MONGO_INITDB_ROOT_PASSWORD: 'blazing'
+    command: 'mongod --replSet rs0 --keyFile /opt/.keyfile/keyfile --bind_ip_all'
+    ports:
+      - 27017:27017
+  mongodb_init:
+    image: mongo:6
+    container_name: blazing-mongodb-init
+    restart: 'on-failure'
+    depends_on: [mongodb]
+    command: >-
+      sh -c "sleep 10 && mongosh -u blazing -p blazing --host mongodb:27017 --eval 'rs.initiate({
+        \"_id\":\"rs0\",
+        "members":[
+          {
+            \"_id\": 0,
+            \"host\":\"host.docker.internal:27017\",
+          }
+        ]
+      })' && if [ $(mongosh -u blazing -p blazing --quiet --host mongodb:27017 --eval 'rs.status().ok') -eq 1 ]; then exit 0; else exit 1; fi"

@@ -18,11 +18,23 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@blazing/ignited": [
-        "libs/ignited/src"
+      "@blazing/ignition": [
+        "libs/ignition/src"
       ],
-      "@blazing/ignited/*": [
-        "libs/ignited/src/*"
+      "@blazing/ignition/*": [
+        "libs/ignition/src/*"
+      ],
+      "@blazing/tactical-design": [
+        "libs/tactical-design/src"
+      ],
+      "@blazing/tactical-design/*": [
+        "libs/tactical-design/src/*"
+      ],
+      "@blazing/amqp": [
+        "libs/amqp/src"
+      ],
+      "@blazing/amqp/*": [
+        "libs/amqp/src/*"
       ]
     }
   }

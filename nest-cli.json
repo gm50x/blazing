@@ -25,6 +25,24 @@
       "compilerOptions": {
         "tsConfigPath": "apps/blazing/tsconfig.app.json"
       }
+    },
+    "tactical-design": {
+      "type": "library",
+      "root": "libs/tactical-design",
+      "entryFile": "index",
+      "sourceRoot": "libs/tactical-design/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/tactical-design/tsconfig.lib.json"
+      }
+    },
+    "amqp": {
+      "type": "library",
+      "root": "libs/amqp",
+      "entryFile": "index",
+      "sourceRoot": "libs/amqp/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/amqp/tsconfig.lib.json"
+      }
     }
   },
   "monorepo": true,
